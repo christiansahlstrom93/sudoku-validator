@@ -61,7 +61,7 @@ const checkLengths = (board: Board): boolean => {
   if (board.length !== 9) {
     return false;
   }
-  board.forEach((row, rowIndex) => {
+  board.forEach((row) => {
     if (row.length !== 9) {
       result = false;
     }

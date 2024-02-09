@@ -1,9 +1,32 @@
 import { checkBoard } from "./SudokuSolver";
-import { BaseBoard, Board, Range } from "./types";
+import { BaseBoard, Board, Range, SudokuLevel } from "./types";
 
 const COLUMN_SIZE = 9;
 
-export const createBoard = (startValue?: Range<1, 10>): Board => {
+export const generateBoard = (level: SudokuLevel): Board => {
+  const random = Math.floor((Math.random() * 8 + 1)) as Range<1, 10>;
+  const board = createBoard(random);
+  switch (level) {
+    case "easy":
+      return removeCells(board, 3);
+    case "medium":
+      return removeCells(board, 5);
+    case "hard":
+      return removeCells(board, 7);
+  }
+};
+
+const removeCells = (board: Board, eliminate: number): Board => {
+  board.forEach((row) => {
+    for (let i = 0; i < eliminate; i++) {
+      const randomIndex = Math.floor(Math.random() * 8);
+      row[randomIndex] = undefined as any;
+    }
+  });
+  return board;
+}
+
+const createBoard = (startValue?: Range<1, 10>): Board => {
   const board: BaseBoard = createDefaultBoard();
   board.forEach((_, rowIndex) => {
     let next = startValue || 0;

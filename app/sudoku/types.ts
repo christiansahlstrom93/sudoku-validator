@@ -13,3 +13,5 @@ export type Range<F extends number, T extends number> = Exclude<
 export type Board = Range<1, 10>[][];
 
 export type BaseBoard = (number | undefined)[][];
+
+export type SudokuLevel = "easy" | "medium" | "hard";
